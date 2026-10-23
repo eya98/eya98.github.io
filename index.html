@@ -12,34 +12,39 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230F172A'/%3E%3Ccircle cx='12' cy='13' r='4' fill='%23F07CA0'/%3E%3Ccircle cx='21' cy='19' r='3' fill='%2360A5FA'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <script>
   // Apply a saved theme before first paint.
   try { var t = localStorage.getItem('theme'); if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
 </script>
 <style>
-/* Swiss / minimal: cool navy and slate neutrals, one interactive accent (blue), and eosin
-   pink from H&E staining reserved for data highlights. IBM Plex Sans for text,
-   JetBrains Mono for labels, dates and numbers. Motion only shows how the numbers changed. */
+/* An H&E slide, read under the microscope: hematoxylin violet carries the structure and the
+   interactive accent, eosin pink marks results. Neutrals lean violet like stained glass slides.
+   Bricolage Grotesque for headings, IBM Plex Sans for text, JetBrains Mono for labels and numbers.
+   Each section carries a magnification marker, zooming out from the detail (40x) to the whole
+   slide (1.25x), the way a pathologist reads a slide and the way my loader reads its pyramid. */
 :root {
-  --bg: #F8FAFC;
+  --bg: #F7F6FA;
   --surface: #FFFFFF;
-  --ink: #0F172A;
-  --muted: #475569;
-  --rule: #E2E8F0;
-  --tint: #EEF2F7;
-  --accent: #2563EB;       /* links, buttons, focus */
+  --ink: #1C1631;          /* hematoxylin-dark: text and dark panels */
+  --muted: #5B556F;
+  --rule: #E4E0EC;
+  --tint: #EFECF5;
+  --accent: #4E40B0;       /* hematoxylin: links, buttons, focus */
   --accent-ink: #FFFFFF;
-  --accent-hover: #1E3A5F;
-  --eosin: #B83A62;        /* data highlights only */
+  --accent-hover: #2F2675;
+  --eosin: #B83A62;        /* eosin: results and highlights */
   --eosin-soft: #FBE7EE;
-  --bar: #94A3B8;
+  --panel: #1C1631;        /* featured dark panels */
+  --panel-ink: #F7F6FA;
+  --bar: #A7A1BC;
   --ok: #16A34A;
-  --viewer: #0F172A;       /* the slide viewer keeps a dark frame in both themes */
+  --viewer: #1C1631;       /* the slide viewer keeps a dark frame in both themes */
   --viewer-ink: #E2E8F0;
   --viewer-muted: #94A3B8;
-  --shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 6px 24px rgba(15, 23, 42, 0.07);
+  --shadow: 0 1px 2px rgba(28, 22, 49, 0.05), 0 8px 28px rgba(28, 22, 49, 0.08);
 
+  --display: "Bricolage Grotesque", "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
   --sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
@@ -54,24 +59,24 @@
   --s1: 0.5rem; --s2: 1rem; --s3: 1.5rem; --s4: 2rem; --s5: 3rem; --s6: 4rem;
   --section: clamp(4rem, 3rem + 5vw, 7rem);
   --gutter: clamp(1rem, 4vw, 2rem);
-  --radius: 14px;
+  --radius: 8px;
   --bar-h: 4rem;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0B1120; --surface: #131C31; --ink: #E2E8F0; --muted: #94A3B8; --rule: #23304A;
-    --tint: #1A2540; --accent: #60A5FA; --accent-ink: #0B1120; --accent-hover: #93C5FD;
-    --eosin: #F07CA0; --eosin-soft: #3A1D2C; --bar: #475569; --ok: #4ADE80; --viewer: #060A16;
+    --bg: #120F1D; --surface: #1B172A; --ink: #ECE9F6; --muted: #A6A0BC; --rule: #2D2742;
+    --tint: #231E36; --accent: #A99CFF; --accent-ink: #120F1D; --accent-hover: #CBC2FF;
+    --eosin: #F07CA0; --eosin-soft: #3A1D2C; --panel: #2B2250; --panel-ink: #ECE9F6; --bar: #5A5374; --ok: #4ADE80; --viewer: #0B0914;
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px rgba(0, 0, 0, 0.35);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0B1120; --surface: #131C31; --ink: #E2E8F0; --muted: #94A3B8; --rule: #23304A;
-  --tint: #1A2540; --accent: #60A5FA; --accent-ink: #0B1120; --accent-hover: #93C5FD;
-  --eosin: #F07CA0; --eosin-soft: #3A1D2C; --bar: #475569; --ok: #4ADE80; --viewer: #060A16;
+  --bg: #120F1D; --surface: #1B172A; --ink: #ECE9F6; --muted: #A6A0BC; --rule: #2D2742;
+  --tint: #231E36; --accent: #A99CFF; --accent-ink: #120F1D; --accent-hover: #CBC2FF;
+  --eosin: #F07CA0; --eosin-soft: #3A1D2C; --panel: #2B2250; --panel-ink: #ECE9F6; --bar: #5A5374; --ok: #4ADE80; --viewer: #0B0914;
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px rgba(0, 0, 0, 0.35);
   color-scheme: dark;
 }
@@ -90,12 +95,30 @@ body {
 a { color: var(--accent); text-underline-offset: 3px; }
 a:hover { color: var(--accent-hover); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
-h1, h2, h3 { font-family: var(--sans); text-wrap: balance; margin: 0; color: var(--ink); }
-h2 { font-size: var(--fs-h2); font-weight: 700; line-height: 1.15; letter-spacing: -0.025em; }
+h1, h2 { font-family: var(--display); }
+h1, h2, h3 { text-wrap: balance; text-wrap: balance; margin: 0; color: var(--ink); }
+h2 { font-family: var(--display); font-size: var(--fs-h2); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; }
 h3 { font-size: var(--fs-h3); font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; }
 p { margin: 0; text-wrap: pretty; }
 .label { font: 500 var(--fs-xs)/1.4 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+/* How I work: three principles, each backed by a result */
+.principles-band { border-block: 1px solid var(--rule); background: var(--surface); }
+.principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.principle { display: grid; align-content: start; gap: 0.5rem; padding: var(--s4) var(--s3); border-left: 1px solid var(--rule); min-width: 0; }
+.principle:first-child { border-left: 0; padding-left: 0; }
+.principle h3 { font-family: var(--display); font-size: 1.375rem; font-weight: 700; letter-spacing: -0.02em; }
+.principle p { color: var(--muted); font-size: var(--fs-sm); line-height: 1.6; max-width: 22rem; }
+.p-num { font: 500 var(--fs-xs)/1 var(--mono); color: var(--eosin); letter-spacing: 0.06em; text-transform: uppercase; }
+@media (max-width: 600px) { .hero .hero-copy .tagline { margin-top: var(--s3); } }
+@media (max-width: 800px) { .principles { grid-template-columns: 1fr; } .principle { border-left: 0; border-top: 1px solid var(--rule); padding: var(--s3) 0; } .principle:first-child { border-top: 0; } }
+/* Magnification marker under each section title, styled like a microscope scale bar */
+.scalebar { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.75rem; font: 500 var(--fs-xs)/1 var(--mono); color: var(--muted); letter-spacing: 0.02em; }
+.scalebar i { position: relative; width: 3rem; height: 2px; background: var(--ink); }
+.scalebar i::before, .scalebar i::after { content: ""; position: absolute; top: -4px; width: 2px; height: 10px; background: var(--ink); }
+.scalebar i::before { left: 0; } .scalebar i::after { right: 0; }
+.scalebar b { color: var(--eosin); font-weight: 600; }
+
 
 /* Top bar */
 .progress { position: fixed; inset: 0 0 auto; height: 2px; z-index: 60; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
@@ -106,11 +129,15 @@ p { margin: 0; text-wrap: pretty; }
 .mark:hover { color: var(--ink); }
 .mark i { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--eosin); display: inline-block; }
 .nav { display: flex; gap: 0.125rem; margin-left: auto; position: relative; }
-.nav a { position: relative; display: inline-flex; align-items: center; min-height: 44px; color: var(--muted); text-decoration: none; font: 500 var(--fs-sm)/1 var(--sans); padding: 0 0.8rem; border-radius: 999px; transition: color 0.2s; }
-.nav a:hover, .nav a.active { color: var(--ink); }
-.nav-pill { position: absolute; top: 6px; bottom: 6px; border-radius: 999px; background: var(--tint); z-index: -1; transition: transform 0.4s var(--ease), width 0.4s var(--ease), opacity 0.2s; opacity: 0; }
+.nav a { position: relative; display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); text-decoration: none; font: 600 0.9375rem/1 var(--sans); letter-spacing: 0.005em; padding: 0 0.95rem; border-radius: 6px; transition: color 0.2s, background-color 0.2s; }
+.nav a::before { content: ""; position: absolute; inset: 6px 0; border-radius: 6px; background: var(--ink); opacity: 0; transform: scale(0.92); transition: opacity 0.2s, transform 0.2s var(--ease); z-index: -1; }
+.nav a:hover, .nav a:focus-visible { color: var(--bg); }
+.nav a:hover::before, .nav a:focus-visible::before { opacity: 1; transform: none; }
+.nav a.active { color: var(--accent); }
+.nav a.active:hover { color: var(--bg); }
+.nav-pill { position: absolute; top: 6px; bottom: 6px; border-radius: 6px; background: var(--tint); z-index: -1; transition: transform 0.4s var(--ease), width 0.4s var(--ease), opacity 0.2s; opacity: 0; }
 .actions { display: flex; gap: var(--s1); align-items: center; }
-.icon-btn { width: 44px; height: 44px; flex: none; border-radius: 999px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); display: grid; place-items: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; }
+.icon-btn { width: 44px; height: 44px; flex: none; border-radius: 6px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); display: grid; place-items: center; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; }
 .icon-btn:hover { border-color: var(--muted); }
 .icon-btn svg { width: 1.125rem; height: 1.125rem; }
 .icon-sun { display: none; }
@@ -137,7 +164,7 @@ p { margin: 0; text-wrap: pretty; }
 @media (max-width: 480px) { .topbar .cv-wrap { display: none; } }
 
 /* Buttons and the CV menu */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 44px; font: 600 0.9375rem/1 var(--sans); padding: 0 1.125rem; border-radius: 999px; border: 1px solid transparent; cursor: pointer; text-decoration: none; transition: background-color 0.2s, border-color 0.2s, color 0.2s; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 44px; font: 600 0.9375rem/1 var(--sans); padding: 0 1.125rem; border-radius: 6px; border: 1px solid transparent; cursor: pointer; text-decoration: none; transition: background-color 0.2s, border-color 0.2s, color 0.2s; }
 .btn-primary { background: var(--accent); color: var(--accent-ink); }
 .btn-primary:hover { background: var(--accent-hover); color: var(--accent-ink); }
 .btn-ghost { background: var(--surface); color: var(--ink); border-color: var(--rule); }
@@ -157,10 +184,10 @@ p { margin: 0; text-wrap: pretty; }
 .hero { padding-block: clamp(2.5rem, 2rem + 4vw, 5rem) var(--section); }
 .hero .container { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; }
 .hero-copy { min-width: 0; }
-.hello { display: inline-flex; align-items: center; gap: 0.625rem; font: 500 var(--fs-xs)/1.4 var(--mono); letter-spacing: 0.02em; color: var(--muted); padding: 0.375rem 0.75rem; border: 1px solid var(--rule); border-radius: 999px; background: var(--surface); }
+.hello { display: inline-flex; align-items: center; gap: 0.625rem; font: 500 var(--fs-xs)/1.4 var(--mono); letter-spacing: 0.02em; color: var(--muted); padding: 0.375rem 0.75rem; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
 .hello .dot { width: 0.5rem; height: 0.5rem; flex: none; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 55%, transparent); animation: ping 2.4s infinite; }
 @keyframes ping { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 55%, transparent); } 70%, 100% { box-shadow: 0 0 0 9px transparent; } }
-.hero h1 { font-size: var(--fs-h1); font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; margin-top: var(--s3); }
+.hero h1 { font-family: var(--display); font-size: var(--fs-h1); font-weight: 750; letter-spacing: -0.035em; line-height: 1.05; margin-top: var(--s3); }
 .hero h1 .line { display: block; }
 .hero h1 .line > span { display: inline-block; }
 .hero h1 em { font-style: normal; color: var(--accent); }
@@ -205,6 +232,8 @@ p { margin: 0; text-wrap: pretty; }
 
 /* Selected work index (hero) */
 .index { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; min-width: 0; }
+.tile.lead { grid-column: 1 / -1; border-color: color-mix(in srgb, var(--accent) 35%, var(--rule)); background: linear-gradient(135deg, var(--surface), var(--tint)); }
+.tile.lead .tile-num { font-size: clamp(2rem, 1.5rem + 1.6vw, 2.75rem); color: var(--accent); }
 .tile { display: flex; flex-direction: column; gap: 0.375rem; padding: var(--s2) 1.125rem; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--surface); color: var(--ink); text-decoration: none; min-width: 0; transition: border-color 0.2s, box-shadow 0.25s var(--ease); }
 .tile:hover { border-color: var(--accent); box-shadow: var(--shadow); color: var(--ink); }
 .tile .label { font-size: 0.6875rem; }
@@ -278,7 +307,7 @@ section.block:last-of-type { padding-bottom: var(--section); }
 }
 
 /* Cards and charts */
-.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); margin-top: clamp(3.5rem, 3rem + 3vw, 5rem); }
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); margin-top: clamp(3.5rem, 3rem + 3vw, 5rem); align-items: start; }
 @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; gap: var(--s2); } }
 .card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: clamp(1.25rem, 1rem + 1.2vw, 2rem); display: flex; flex-direction: column; gap: var(--s2); min-width: 0; }
 .card h3 { margin-top: -0.25rem; }
@@ -310,26 +339,79 @@ section.block:last-of-type { padding-bottom: var(--section); }
 .tbox p { font-size: var(--fs-sm); line-height: 1.45; margin-top: 0.375rem; }
 
 /* Research */
-.research { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); }
+.research { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); align-items: start; }
+.also { margin-top: var(--s3); color: var(--muted); font-size: var(--fs-sm); line-height: 1.6; display: flex; gap: 0.75rem; align-items: baseline; flex-wrap: wrap; }
+.case { transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s var(--ease); }
+.case:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--rule)); box-shadow: var(--shadow); transform: translateY(-3px); }
+.case-head { display: flex; align-items: center; gap: 0.875rem; }
+.case-head h3 { margin: 0.25rem 0 0; font-size: 1.1875rem; line-height: 1.25; }
+.case-hero { display: grid; gap: 0.75rem; padding: var(--s3); border-radius: 12px; background: var(--tint); }
+.case-num { display: flex; align-items: baseline; gap: 0.625rem; font: 600 clamp(2rem, 1.4rem + 2vw, 2.75rem)/1 var(--mono); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.case-num b { font-weight: 600; color: var(--eosin); }
+.case-num b.dim { color: var(--muted); font-weight: 500; }
+.case-num span { font-size: 0.45em; color: var(--muted); letter-spacing: 0; }
+.case-cap { font: 400 var(--fs-xs)/1.45 var(--mono); color: var(--muted); margin: -0.25rem 0 0.25rem; }
+.case .bars { margin-top: 0; }
+.case-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.875rem; }
+.case-steps li { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 0.75rem; align-items: baseline; }
+.case-steps span { font: 500 var(--fs-xs)/1.4 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.case-steps p { line-height: 1.55; font-size: var(--fs-sm); }
+@media (max-width: 480px) { .case-steps li { grid-template-columns: 1fr; gap: 0.125rem; } .case-hero { padding: var(--s2); } }
+@media (prefers-reduced-motion: reduce) { .case, .case:hover { transition: none; transform: none; } }
 @media (max-width: 900px) { .research { grid-template-columns: 1fr; gap: var(--s2); } }
 
 /* Timeline */
-.timeline { list-style: none; margin: 0; padding: 0; display: grid; max-width: 52rem; }
-.timeline li { display: grid; grid-template-columns: 10rem minmax(0, 1fr); gap: var(--s3); padding: var(--s3) 0; border-top: 1px solid var(--rule); }
-.timeline li:last-child { border-bottom: 1px solid var(--rule); }
-.timeline .label { padding-top: 0.2rem; }
-.timeline h3 { font-size: var(--fs-md); font-weight: 600; }
-.timeline p { color: var(--muted); margin-top: 0.25rem; line-height: 1.6; }
-@media (max-width: 600px) { .timeline li { grid-template-columns: 1fr; gap: 0.375rem; padding: var(--s2) 0; } }
+/* Leadership: a featured promotion card beside four smaller cards */
+.lead-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0.875rem; }
+.lead-feature { grid-row: span 3; display: flex; flex-direction: column; gap: 0.75rem; padding: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem); border-radius: var(--radius); background: var(--panel); color: var(--panel-ink); min-width: 0; }
+.lead-feature h3 { color: var(--panel-ink); font: 600 clamp(1.5rem, 1.2rem + 1vw, 2rem)/1.15 var(--sans); letter-spacing: -0.02em; }
+.lead-feature p { opacity: 0.78; line-height: 1.6; max-width: 30rem; }
+.lead-feature .lead-date { color: var(--eosin); }
+.lead-path { display: flex; align-items: center; gap: 0.375rem; flex-wrap: wrap; margin-top: auto; padding-top: var(--s3); }
+.lead-path span { display: grid; gap: 0.125rem; font: 500 var(--fs-sm)/1.3 var(--sans); padding: 0.5rem 0.625rem; border-radius: 10px; white-space: nowrap; border: 1px solid color-mix(in srgb, var(--panel-ink) 22%, transparent); }
+.lead-path span b { font: 500 var(--fs-xs)/1 var(--mono); opacity: 0.7; }
+.lead-path span.now { background: var(--eosin); border-color: var(--eosin); color: var(--bg); }
+.lead-path i { width: 0.625rem; height: 1px; background: color-mix(in srgb, var(--panel-ink) 40%, transparent); }
+.lead-date { font: 500 var(--fs-xs)/1.4 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.lead-card { display: flex; gap: 0.875rem; align-items: flex-start; padding: var(--s3); border: 1px solid var(--rule); border-radius: var(--radius); background: var(--surface); min-width: 0; transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s var(--ease); }
+.lead-card:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--rule)); box-shadow: var(--shadow); transform: translateY(-3px); }
+.lead-card h3 { font: 600 var(--fs-md)/1.3 var(--sans); margin: 0.25rem 0 0.375rem; }
+.lead-card p { color: var(--muted); font-size: var(--fs-sm); line-height: 1.55; }
+@media (max-width: 800px) { .lead-feature { grid-column: 1 / -1; grid-row: auto; } }
+@media (max-width: 600px) { .lead-grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .lead-card, .lead-card:hover { transition: none; transform: none; } }
 
 /* Skills and education */
-.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: var(--s4) var(--s3); }
+/* Skills: core stack strip, then one card per area. Chips with a dot say where the skill was used. */
+.core { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr)); gap: 0.75rem; margin-bottom: var(--s4); }
+.core-item { display: grid; gap: 0.375rem; padding: 1rem 1.125rem; border-radius: var(--radius); background: var(--panel); color: var(--panel-ink); min-width: 0; transition: transform 0.25s var(--ease); }
+.core-item:hover { transform: translateY(-3px); }
+.core-item b { font: 600 1.0625rem/1.2 var(--sans); letter-spacing: -0.01em; }
+.core-item span { font: 400 var(--fs-xs)/1.45 var(--mono); opacity: 0.75; }
+.core-item i { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--eosin); display: block; margin-bottom: 0.25rem; }
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 0.875rem; }
+.skill-group { display: grid; align-content: start; gap: 0.875rem; padding: var(--s3); border: 1px solid var(--rule); border-radius: var(--radius); background: var(--surface); min-width: 0; transition: border-color 0.25s, box-shadow 0.25s; }
+.skill-group:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--rule)); box-shadow: var(--shadow); }
+.sg-head { display: flex; align-items: center; gap: 0.75rem; }
+.sg-icon { flex: none; width: 2.5rem; height: 2.5rem; border-radius: 10px; display: grid; place-items: center; background: var(--tint); color: var(--accent); }
+.sg-icon svg { width: 1.25rem; height: 1.25rem; }
+.sg-head h3 { font: 600 1.0625rem/1.25 var(--sans); letter-spacing: -0.01em; }
+.sg-head small { display: block; font: 500 var(--fs-xs)/1.3 var(--mono); color: var(--muted); margin-top: 0.125rem; }
 .group-title { font: 500 var(--fs-xs)/1.4 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
 .chips { display: flex; flex-wrap: wrap; gap: 0.375rem; }
-.chip { font: 400 var(--fs-sm)/1 var(--sans); padding: 0.5rem 0.75rem; border-radius: 999px; border: 1px solid var(--rule); background: var(--surface); }
+.chip { position: relative; display: inline-flex; align-items: center; gap: 0.375rem; font: 500 var(--fs-sm)/1 var(--sans); padding: 0.5rem 0.75rem; border-radius: 6px; border: 1px solid var(--rule); background: var(--bg); color: var(--ink); transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.2s var(--ease); }
+.chip:hover, .chip:focus-visible { background: var(--ink); color: var(--bg); border-color: var(--ink); transform: translateY(-1px); outline: none; }
+.chip[data-where]::before { content: ""; width: 0.375rem; height: 0.375rem; border-radius: 50%; background: var(--eosin); flex: none; }
+.chip[data-where]::after { content: attr(data-where); position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translate(-50%, 4px); width: max-content; max-width: 15rem; padding: 0.5rem 0.625rem; border-radius: 8px; background: var(--ink); color: var(--bg); font: 400 var(--fs-xs)/1.4 var(--sans); text-align: center; white-space: normal; pointer-events: none; opacity: 0; transition: opacity 0.18s, transform 0.18s var(--ease); z-index: 5; box-shadow: var(--shadow); }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.chip[data-where]:hover::after, .chip[data-where]:focus::after, .chip[data-where]:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+.skills-key { display: flex; align-items: center; gap: 0.5rem; margin-top: var(--s2); font-size: var(--fs-sm); color: var(--muted); }
+.skills-key i { width: 0.375rem; height: 0.375rem; border-radius: 50%; background: var(--eosin); display: inline-block; }
 .edu { margin-top: var(--s5); padding-top: var(--s4); border-top: 1px solid var(--rule); }
 .edu-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--s2); }
-.edu-list p { padding: var(--s2) var(--s3); border: 1px solid var(--rule); border-radius: var(--radius); background: var(--surface); font-weight: 500; line-height: 1.5; }
+.edu-list p { display: grid; gap: 0.25rem; padding: var(--s2) var(--s3); border: 1px solid var(--rule); border-radius: var(--radius); background: var(--surface); font-weight: 600; line-height: 1.45; }
+.edu-list p span { font: 500 var(--fs-xs)/1.3 var(--mono); color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .core-item, .chip, .chip[data-where]::after { transition: none; } .core-item:hover, .chip:hover { transform: none; } }
 
 /* CV + contact */
 .cv-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); }
@@ -341,14 +423,14 @@ section.block:last-of-type { padding-bottom: var(--section); }
 .cv-card .go { display: inline-flex; align-items: center; gap: 0.4rem; font: 600 0.9375rem/1 var(--sans); color: var(--accent); margin-top: auto; padding-top: var(--s1); }
 .cv-card .go svg { width: 1rem; height: 1rem; transition: transform 0.25s var(--ease); }
 .cv-card:hover .go svg { transform: translateY(2px); }
-.contact { margin-top: var(--s3); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s3); align-items: center; padding: clamp(1.5rem, 1rem + 2vw, 2.5rem); border-radius: 18px; background: var(--ink); color: var(--bg); }
-.contact h3 { font-size: clamp(1.375rem, 1rem + 1.5vw, 1.875rem); font-weight: 700; letter-spacing: -0.02em; color: var(--bg); }
+.contact { margin-top: var(--s3); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s3); align-items: center; padding: clamp(1.5rem, 1rem + 2vw, 2.5rem); border-radius: var(--radius); background: var(--panel); color: var(--panel-ink); }
+.contact h3 { font-size: clamp(1.375rem, 1rem + 1.5vw, 1.875rem); font-weight: 700; letter-spacing: -0.02em; color: var(--panel-ink); }
 .contact p { opacity: 0.78; margin-top: 0.5rem; }
 .contact-actions { display: flex; flex-wrap: wrap; gap: 0.625rem; align-items: center; }
-.contact .btn-primary { background: var(--bg); color: var(--ink); }
+.contact .btn-primary { background: var(--panel-ink); color: var(--panel); }
 .contact .btn-primary:hover { background: var(--accent); color: var(--accent-ink); }
-.contact .btn-ghost { background: transparent; color: var(--bg); border-color: color-mix(in srgb, var(--bg) 35%, transparent); }
-.contact .btn-ghost:hover { border-color: var(--bg); color: var(--bg); }
+.contact .btn-ghost { background: transparent; color: var(--panel-ink); border-color: color-mix(in srgb, var(--panel-ink) 35%, transparent); }
+.contact .btn-ghost:hover { border-color: var(--panel-ink); color: var(--panel-ink); }
 .email { flex-basis: 100%; font: 500 var(--fs-md)/1.4 var(--mono); user-select: all; overflow-wrap: anywhere; }
 @media (max-width: 760px) { .contact { grid-template-columns: 1fr; } }
 footer { padding-block: 0 var(--s5); color: var(--muted); font-size: var(--fs-sm); }
@@ -381,7 +463,7 @@ footer .container { display: flex; flex-wrap: wrap; justify-content: space-betwe
       <span class="nav-pill" id="nav-pill"></span>
       <a href="#work">Work</a>
       <a href="#research">Research</a>
-      <a href="#people">People</a>
+      <a href="#people">Leadership</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -442,23 +524,32 @@ footer .container { display: flex; flex-wrap: wrap; justify-content: space-betwe
     </div>
 
     <nav class="index" aria-label="Selected work">
-      <a class="tile" href="#work"><span class="label">Tissue segmentation</span><span class="tile-num"><span class="num" data-count="91.4" data-dec="1">91.4</span> <small>IoU</small></span><span class="tile-txt">Up from 81.6 after my ViT-Adapter fix. Runs in production for BioNTech</span></a>
-      <a class="tile" href="#benchmark"><span class="label">Backbone benchmark</span><span class="tile-num"><span class="num">86M</span> <small>vs 1.1B</small></span><span class="tile-txt">The smaller backbone won my 5-model benchmark</span></a>
-      <a class="tile" href="#msi"><span class="label">Biomarker prediction</span><span class="tile-num"><span class="num">1st</span> <small>in recall</small></span><span class="tile-txt">Co-developed LongViT model for MSI, against three external vendors</span></a>
-      <a class="tile" href="#samples"><span class="label">Foundation-model embeddings</span><span class="tile-num"><span class="num" data-count="1195" data-dec="0">1,195</span> <small>slides</small></span><span class="tile-txt">Prov-GigaPath embeddings to flag failed lab sample preparation</span></a>
-      <a class="tile" href="#dt"><span class="label">Reinforcement learning</span><span class="tile-num"><span class="num">70.5%</span> <small>vs 9.5%</small></span><span class="tile-txt">Decision Transformer: a probe located the bottleneck in the state embeddings</span></a>
-      <a class="tile" href="#lipreading"><span class="label">Audio-visual speech</span><span class="tile-num"><span class="num">98→40%</span></span><span class="tile-txt">Word error rate, Arabic lip reading on a dataset I built</span></a>
+      <a class="tile lead" href="#work"><span class="label">Tissue segmentation · in production for BioNTech</span><span class="tile-num"><span class="num" data-count="91.4" data-dec="1">91.4</span> <small>IoU</small></span><span class="tile-txt">Up from 81.6 after I fixed a ViT-Adapter bug. Approved by BioNTech's pathologists</span></a>
+      <a class="tile" href="#benchmark"><span class="label">Backbone benchmark</span><span class="tile-num"><span class="num">13×</span> <small>smaller</small></span><span class="tile-txt">The 86M Hibou-B beat the 1.1B H-optimus on IoU in my 5-model benchmark</span></a>
+      <a class="tile" href="#msi"><span class="label">Biomarker prediction</span><span class="tile-num"><span class="num">1st</span> <small>in recall</small></span><span class="tile-txt">Against 3 external vendors, predicting MSI from whole slides (co-developed)</span></a>
+      <a class="tile" href="#lipreading"><span class="label">Multimodal speech</span><span class="tile-num"><span class="num">98→40%</span></span><span class="tile-txt">Audio-visual word error rate, on a 10-hour Arabic dataset I built</span></a>
+      <a class="tile" href="#dt"><span class="label">Model diagnosis</span><span class="tile-num"><span class="num">9.5%</span> <small>vs 70.5%</small></span><span class="tile-txt">A probe showed a Decision Transformer's state embeddings lost the signal</span></a>
     </nav>
   </div>
 </section>
 
 <!-- WORK -->
+<!-- HOW I WORK -->
+<section class="gutter principles-band" aria-label="How I work">
+  <div class="container principles" data-reveal>
+    <div class="principle"><span class="p-num">Diagnosis</span><h3>Find the cause</h3><p>When a model underperforms, I trace why, from a fine-tuning bug in a segmentation adapter to a probe that located a Decision Transformer's bottleneck.</p></div>
+    <div class="principle"><span class="p-num">Rigour</span><h3>Change one variable at a time</h3><p>Five backbones behind one shared head, so the backbone was the only difference. Every result reported as measured.</p></div>
+    <div class="principle"><span class="p-num">Delivery</span><h3>Ship it with the experts</h3><p>Biweekly results with BioNTech, deployment sessions with their team, and direct work with pathologists.</p></div>
+  </div>
+</section>
+
 <section class="block gutter" id="work">
   <div class="container">
     <div class="work-intro">
       <div class="section-head" data-reveal>
-        <span class="label">InstaDeep, a BioNTech company · Jun 2023 to present</span>
+        <span class="label">Work · InstaDeep, a BioNTech company · Jun 2023 to present</span>
         <h2>Tissue segmentation on gigapixel slides, for BioNTech</h2>
+        <span class="scalebar" aria-hidden="true"><i></i><b>40×</b> 0.25 µm/px</span>
         <p>A single H&amp;E slide can be close to 90,000 pixels on a side. The model labels tissue regions across the whole slide and runs in production on the client's platform. I was a core engineer on the team and owned the deployment. Scroll through the build.</p>
       </div>
       <figure class="viewer" aria-label="Animated whole-slide viewer: a real breast cancer slide read through three pyramid levels, then the pathologists' tissue annotation overlaid">
@@ -520,12 +611,12 @@ footer .container { display: flex; flex-wrap: wrap; justify-content: space-betwe
         </li>
         <li class="step" tabindex="0">
           <h3>Finding the fine-tuning bug</h3>
-          <p>The ViT-Adapter fine-tuning had a bug. I found and fixed it, and the same architecture gained almost ten points of IoU.</p>
+          <p>The adapter was attached to a part of the model that was never called, so it never received gradients and never trained. I rewired it into the real forward path and fixed the optimizer and learning-rate setup. The same architecture gained almost ten points of IoU.</p>
           <span class="delta">IoU 81.6 → 91.4</span>
         </li>
         <li class="step" tabindex="0">
           <h3>Shipping it</h3>
-          <p>I owned the PyTorch to ONNX deployment for production inference on the client's platform, with an automated check that the ONNX outputs match PyTorch. I ran the technical deployment sessions with the BioNTech team and worked directly with their pathologists.</p>
+          <p>I owned the PyTorch to ONNX deployment for production inference on the client's platform, with an automated check that the ONNX outputs match PyTorch. I ran the technical deployment sessions with the BioNTech team. The model was tested on their platform and approved by their pathologists.</p>
         </li>
       </ol>
     </div>
@@ -581,31 +672,54 @@ footer .container { display: flex; flex-wrap: wrap; justify-content: space-betwe
     <div class="section-head" data-reveal>
       <span class="label">Earlier work</span>
       <h2>Research</h2>
-      <p>Two projects outside pathology, where the useful result was understanding why a model behaved the way it did.</p>
+        <span class="scalebar" aria-hidden="true"><i></i><b>20×</b> 0.5 µm/px</span>
+      <p>Two projects outside pathology. In both, the result that mattered was finding out why a model behaved the way it did.</p>
     </div>
     <div class="research">
-      <article class="card" id="dt" data-reveal>
-        <span class="label">Jan to Jun 2023 · reinforcement learning</span>
-        <h3>Decision Transformer for bin packing</h3>
-        <p>A six-month research topic in a four-person team. We co-developed a GPT-2 Decision Transformer trained on <strong>1.5TB of trajectories</strong> from the production SPPO agent. It beat SPPO on 1 of 45 instances. An XGBoost probe then showed why: the raw states carried the signal, the embedded states lost it, so the bottleneck was the state embeddings.</p>
-        <div class="bars" aria-label="XGBoost probe accuracy">
-          <div class="bar-row"><span>raw states</span><div class="bar hi"><i style="--w:70.5%"></i></div><span class="num">70.5%</span></div>
-          <div class="bar-row"><span>embedded states</span><div class="bar"><i style="--w:9.5%;--d:0.15s"></i></div><span class="num">9.5%</span></div>
+      <article class="card case" id="dt" data-reveal>
+        <div class="case-head">
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg></span>
+          <div><span class="label">Jan to Jun 2023 · InstaDeep</span><h3>Decision Transformer for bin packing</h3></div>
         </div>
+        <div class="case-hero">
+          <div class="case-num"><b class="dim">70.5%</b><span>→</span><b>9.5%</b></div>
+          <p class="case-cap">XGBoost probe accuracy, raw states → the model's embedded states. Higher is better</p>
+          <div class="bars" aria-label="XGBoost probe accuracy, higher is better">
+            <div class="bar-row"><span>raw states</span><div class="bar"><i style="--w:70.5%"></i></div><span class="num">70.5%</span></div>
+            <div class="bar-row"><span>embedded states</span><div class="bar hi"><i style="--w:9.5%;--d:0.15s"></i></div><span class="num">9.5%</span></div>
+          </div>
+        </div>
+        <ol class="case-steps">
+          <li><span>Question</span><p>Can a GPT-2 Decision Transformer learn bin packing from a production RL agent's experience?</p></li>
+          <li><span>Approach</span><p>Co-developed in a four-person team, trained on <strong>1.5TB of trajectories</strong> from the SPPO agent.</p></li>
+          <li><span>Finding</span><p>An XGBoost probe located the bottleneck: the signal was in the raw states and lost in the embeddings. That explained why the model beat SPPO on only 1 of 45 instances.</p></li>
+        </ol>
+        <div class="card-tags"><span class="tag hot">Reinforcement learning</span><span class="tag">Transformers</span><span class="tag">Model diagnosis</span></div>
       </article>
-      <article class="card" id="lipreading" data-reveal style="--stagger:0.08s">
-        <span class="label">Feb to Aug 2022 · research intern</span>
-        <h3>Arabic lip reading</h3>
-        <p>Speech recognition aimed at people with ALS, who can lose the ability to speak. I built a <strong>10-hour multi-dialect Arabic audio-visual dataset</strong> with 13 speakers, including the pipeline: collection, subtitles, trimming, face detection and audio extraction. Then I fine-tuned the multimodal AV-HuBERT model on it.</p>
-        <div class="bars" aria-label="Audio-visual word error rate, lower is better">
-          <div class="bar-row"><span>baseline</span><div class="bar"><i style="--w:98%"></i></div><span class="num">98%</span></div>
-          <div class="bar-row"><span>vocabulary 1,000</span><div class="bar"><i style="--w:82.75%;--d:0.12s"></i></div><span class="num">82.75%</span></div>
-          <div class="bar-row"><span>vocabulary 100</span><div class="bar"><i style="--w:68.22%;--d:0.24s"></i></div><span class="num">68.22%</span></div>
-          <div class="bar-row"><span>+ post-processing</span><div class="bar hi"><i style="--w:40%;--d:0.36s"></i></div><span class="num">40%</span></div>
+      <article class="card case" id="lipreading" data-reveal style="--stagger:0.08s">
+        <div class="case-head">
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+          <div><span class="label">Feb to Aug 2022 · research intern</span><h3>Arabic lip reading</h3></div>
         </div>
-        <span class="chart-note">Audio-visual word error rate, lower is better</span>
+        <div class="case-hero">
+          <div class="case-num"><b class="dim">98%</b><span>→</span><b>40%</b></div>
+          <p class="case-cap">Audio-visual word error rate, lower is better. Video alone: 85%</p>
+          <div class="bars" aria-label="Audio-visual word error rate, lower is better">
+            <div class="bar-row"><span>baseline</span><div class="bar"><i style="--w:98%"></i></div><span class="num">98%</span></div>
+            <div class="bar-row"><span>vocabulary 1,000</span><div class="bar"><i style="--w:82.75%;--d:0.12s"></i></div><span class="num">82.75%</span></div>
+            <div class="bar-row"><span>vocabulary 100</span><div class="bar"><i style="--w:68.22%;--d:0.24s"></i></div><span class="num">68.22%</span></div>
+            <div class="bar-row"><span>+ post-processing</span><div class="bar hi"><i style="--w:40%;--d:0.36s"></i></div><span class="num">40%</span></div>
+          </div>
+        </div>
+        <ol class="case-steps">
+          <li><span>Question</span><p>Can lips and audio together recognize Arabic speech, for people with ALS who can lose their voice?</p></li>
+          <li><span>Approach</span><p>Built a <strong>10-hour, 13-speaker, multi-dialect dataset</strong> and its pipeline: collection, subtitles, trimming, face detection, audio extraction.</p></li>
+          <li><span>Finding</span><p>Fine-tuned multimodal AV-HuBERT: 40% word error rate with audio and video together, against 85% on video alone.</p></li>
+        </ol>
+        <div class="card-tags"><span class="tag hot">Multimodal</span><span class="tag">Speech recognition</span><span class="tag">Dataset building</span></div>
       </article>
     </div>
+    <p class="also" data-reveal><span class="label">Also</span> 2021 research internship at the EMAT Laboratory, University of Moncton, Canada (remote): a CNN for Alzheimer's staging from MRI.</p>
   </div>
 </section>
 
@@ -614,15 +728,24 @@ footer .container { display: flex; flex-wrap: wrap; justify-content: space-betwe
   <div class="container">
     <div class="section-head" data-reveal>
       <span class="label">Beyond the models</span>
-      <h2>Mentoring, hiring and talks</h2>
+      <h2>Leadership, mentoring and hiring</h2>
+        <span class="scalebar" aria-hidden="true"><i></i><b>10×</b> 1.0 µm/px</span>
     </div>
-    <ol class="timeline" data-reveal>
-      <li><span class="label">Sep 2025</span><div><h3>Promoted to Tech Lead</h3><p>After three years as a Machine Learning Engineer at InstaDeep.</p></div></li>
-      <li><span class="label">Feb to Aug 2025</span><div><h3>Mentored an intern</h3><p>On foundation-model efficiency research, which produced a new knowledge distillation method.</p></div></li>
-      <li><span class="label">Hiring</span><div><h3>Technical tests and interviews</h3><p>Co-designed the machine learning and deep learning technical tests with the hiring team, and interviewed internship candidates.</p></div></li>
-      <li><span class="label">Dec 2022</span><div><h3>Guest speaker</h3><p>AI for Brain Disease event, National Engineering School of Tunis (ENIT).</p></div></li>
-      <li><span class="label">2021</span><div><h3>Research internship, University of Moncton (remote)</h3><p>A CNN for Alzheimer's staging from MRI, at the EMAT Laboratory, Canada.</p></div></li>
-    </ol>
+    <div class="lead-grid" data-reveal>
+      <article class="lead-feature">
+        <span class="lead-date">Sep 2025</span>
+        <h3>Promoted to Tech Lead</h3>
+        <p>After three years as a Machine Learning Engineer at InstaDeep, working on BioNTech's gigapixel imaging projects. I review the team's pull requests and own the model's deployment, through to the pathologists' approval.</p>
+        <div class="lead-path" aria-label="Career path">
+          <span><b>Feb 2022</b>Intern</span><i aria-hidden="true"></i>
+          <span><b>Sep 2022</b>ML Engineer</span><i aria-hidden="true"></i>
+          <span class="now"><b>Sep 2025</b>Tech Lead</span>
+        </div>
+      </article>
+      <article class="lead-card"><span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="m16 11 2 2 4-4"/></svg></span><div><span class="lead-date">Feb to Aug 2025</span><h3>Mentored an intern</h3><p>On foundation-model efficiency research, which produced a new knowledge distillation method.</p></div></article>
+      <article class="lead-card"><span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h4"/></svg></span><div><span class="lead-date">Hiring</span><h3>Technical tests and interviews</h3><p>Co-designed the machine learning and deep learning technical tests with the hiring team, and interviewed internship candidates.</p></div></article>
+      <article class="lead-card"><span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><div><span class="lead-date">Dec 2022</span><h3>Guest speaker</h3><p>AI for Brain Disease event, National Engineering School of Tunis (ENIT).</p></div></article>
+    </div>
   </div>
 </section>
 
@@ -632,17 +755,26 @@ footer .container { display: flex; flex-wrap: wrap; justify-content: space-betwe
     <div class="section-head" data-reveal>
       <span class="label">Toolbox</span>
       <h2>Skills and education</h2>
+        <span class="scalebar" aria-hidden="true"><i></i><b>5×</b> 2.0 µm/px</span>
+    </div>
+    <div class="core" data-reveal>
+      <div class="core-item"><i></i><b>PyTorch</b><span>Daily stack since 2022</span></div>
+      <div class="core-item"><i></i><b>Vision foundation models</b><span>5 backbones benchmarked</span></div>
+      <div class="core-item"><i></i><b>Segmentation</b><span>Mask2Former and ViT-Adapter, in production</span></div>
+      <div class="core-item"><i></i><b>ONNX deployment</b><span>Shipped to production</span></div>
     </div>
     <div class="skills" data-reveal>
-      <div class="skill-group"><h3 class="group-title">Deep learning</h3><div class="chips"><span class="chip">PyTorch</span><span class="chip">PyTorch Lightning</span><span class="chip">Hugging Face</span><span class="chip">PEFT</span><span class="chip">TensorFlow</span><span class="chip">scikit-learn</span></div></div>
-      <div class="skill-group"><h3 class="group-title">Vision models</h3><div class="chips"><span class="chip">Mask2Former</span><span class="chip">ViT-Adapter</span><span class="chip">DINOv2</span><span class="chip">DINOv3</span><span class="chip">Hibou</span><span class="chip">LongViT</span><span class="chip">Prov-GigaPath</span><span class="chip">U-Net++</span></div></div>
-      <div class="skill-group"><h3 class="group-title">Methods</h3><div class="chips"><span class="chip">semantic segmentation</span><span class="chip">self-supervised learning</span><span class="chip">parameter-efficient fine-tuning</span><span class="chip">domain adaptation</span><span class="chip">distributed multi-GPU training</span></div></div>
-      <div class="skill-group"><h3 class="group-title">Deployment and MLOps</h3><div class="chips"><span class="chip">ONNX Runtime</span><span class="chip">Docker</span><span class="chip">FastAPI</span><span class="chip">MLflow</span><span class="chip">Neptune</span><span class="chip">Hydra</span><span class="chip">GCP</span></div></div>
-      <div class="skill-group"><h3 class="group-title">Engineering</h3><div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">Git</span><span class="chip">CI/CD</span><span class="chip">pytest</span><span class="chip">mypy</span></div></div>
+      <div class="skill-group"><div class="sg-head"><span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg></span><div><h3>Deep learning</h3><small>Frameworks</small></div></div><div class="chips"><span class="chip" tabindex="0" data-where="My daily stack, on every project since 2022">PyTorch<span class="vh">: My daily stack, on every project since 2022</span></span><span class="chip">PyTorch Lightning</span><span class="chip">Hugging Face</span><span class="chip" tabindex="0" data-where="Parameter-efficient fine-tuning of vision transformers">PEFT<span class="vh">: Parameter-efficient fine-tuning of vision transformers</span></span><span class="chip" tabindex="0" data-where="CNN for Alzheimer's staging from MRI (2021)">TensorFlow<span class="vh">: CNN for Alzheimer's staging from MRI (2021)</span></span><span class="chip">scikit-learn</span></div></div>
+      <div class="skill-group"><div class="sg-head"><span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></span><div><h3>Vision models</h3><small>Foundation models and heads</small></div></div><div class="chips"><span class="chip" tabindex="0" data-where="Proposed and implemented it: IoU 72 to 81.6">Mask2Former<span class="vh">: Proposed and implemented it: IoU 72 to 81.6</span></span><span class="chip" tabindex="0" data-where="Fixed its fine-tuning bug: IoU 81.6 to 91.4">ViT-Adapter<span class="vh">: Fixed its fine-tuning bug: IoU 81.6 to 91.4</span></span><span class="chip" tabindex="0" data-where="Integrated into distributed multi-GPU training">DINOv2<span class="vh">: Integrated into distributed multi-GPU training</span></span><span class="chip" tabindex="0" data-where="One of 5 backbones in my benchmark">DINOv3<span class="vh">: One of 5 backbones in my benchmark</span></span><span class="chip" tabindex="0" data-where="Hibou-B won my 5-backbone benchmark">Hibou<span class="vh">: Hibou-B won my 5-backbone benchmark</span></span><span class="chip" tabindex="0" data-where="MSI prediction, first in recall against 3 vendors">LongViT<span class="vh">: MSI prediction, first in recall against 3 vendors</span></span><span class="chip" tabindex="0" data-where="Embeddings from 1,195 whole-slide images">Prov-GigaPath<span class="vh">: Embeddings from 1,195 whole-slide images</span></span><span class="chip">U-Net++</span></div></div>
+      <div class="skill-group"><div class="sg-head"><span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3"/></svg></span><div><h3>Methods</h3><small>How I train and adapt models</small></div></div><div class="chips"><span class="chip" tabindex="0" data-where="Tissue segmentation on gigapixel slides">semantic segmentation<span class="vh">: Tissue segmentation on gigapixel slides</span></span><span class="chip" tabindex="0" data-where="Self-supervised foundation-model backbones">self-supervised learning<span class="vh">: Self-supervised foundation-model backbones</span></span><span class="chip" tabindex="0" data-where="LoRA and adapters on vision transformers">parameter-efficient fine-tuning<span class="vh">: LoRA and adapters on vision transformers</span></span><span class="chip" tabindex="0" data-where="Colorectal model fine-tuned on breast cancer: 88 mean IoU">domain adaptation<span class="vh">: Colorectal model fine-tuned on breast cancer: 88 mean IoU</span></span><span class="chip" tabindex="0" data-where="DINOv2 integration on multi-GPU training">distributed multi-GPU training<span class="vh">: DINOv2 integration on multi-GPU training</span></span></div></div>
+      <div class="skill-group"><div class="sg-head"><span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg></span><div><h3>Deployment and MLOps</h3><small>From experiment to production</small></div></div><div class="chips"><span class="chip" tabindex="0" data-where="Owned the production deployment, with a parity check">ONNX Runtime<span class="vh">: Owned the production deployment, with a parity check</span></span><span class="chip">Docker</span><span class="chip">FastAPI</span><span class="chip">MLflow</span><span class="chip">Neptune</span><span class="chip">Hydra</span><span class="chip">GCP</span></div></div>
+      <div class="skill-group"><div class="sg-head"><span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span><div><h3>Engineering</h3><small>Code quality</small></div></div><div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">Git</span><span class="chip">CI/CD</span><span class="chip">pytest</span><span class="chip">mypy</span></div></div>
+      <div class="skill-group"><div class="sg-head"><span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><div><h3>Languages</h3><small>Working languages</small></div></div><div class="chips"><span class="chip">Arabic · native</span><span class="chip">French · fluent</span><span class="chip">English · professional</span></div></div>
     </div>
+    <p class="skills-key"><i></i>Hover or tap a marked skill to see where I used it.</p>
     <div class="edu" data-reveal>
       <h3 class="group-title">Education</h3>
-      <div class="edu-list"><p>Master of Research in AI and Signal Processing, ENIT (2021 to 2022)</p><p>Engineering degree in Statistics and Data Analysis, ESSAI (2019 to 2022)</p></div>
+      <div class="edu-list"><p>Master of Research in AI and Signal Processing<span>ENIT · 2021 to 2022</span></p><p>Engineering degree in Statistics and Data Analysis<span>ESSAI · 2019 to 2022</span></p></div>
     </div>
   </div>
 </section>
@@ -653,6 +785,7 @@ footer .container { display: flex; flex-wrap: wrap; justify-content: space-betwe
     <div class="section-head" data-reveal>
       <span class="label">Two versions, same facts</span>
       <h2>Download my CV</h2>
+        <span class="scalebar" aria-hidden="true"><i></i><b>1.25×</b> 8.0 µm/px</span>
     </div>
     <div class="cv-cards">
       <a class="cv-card" href="cv/Eya_Jabbes_CV_Computer_Vision.pdf" download data-reveal>
